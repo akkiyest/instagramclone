@@ -1,4 +1,4 @@
-//
+ //
 //  AppDelegate.swift
 //  Instagram
 //
@@ -7,15 +7,18 @@
 //
 
 import UIKit
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?
-
-
+    
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        FIRApp.configure()
+        AdobeUXAuthManager.sharedManager().setAuthenticationParametersWithClientID("dea8d65c09b948cc97e382bdc64f079c", withClientSecret:"0342314e-ebcc-4ab2-90e1-e2a34a574d9b")
         return true
     }
 
