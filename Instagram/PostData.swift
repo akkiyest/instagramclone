@@ -18,6 +18,8 @@ class PostData: NSObject {
     var caption: String?
     var date: NSDate?
     var likes: [String] = []
+    var commentCnt: Int?
+    var comment:[String] = []
     var isLiked: Bool = false
     
     init(snapshot: FIRDataSnapshot, myId: String) {
@@ -29,6 +31,10 @@ class PostData: NSObject {
         image = UIImage(data: NSData(base64EncodedString: imageString!, options: .IgnoreUnknownCharacters)!)
         
         name = valueDictionary["name"] as? String
+        
+        commentCnt = valueDictionary["commentcnt"] as? Int
+        
+        comment = valueDictionary["comment"] as! [String]
         
         caption = valueDictionary["caption"] as? String
         

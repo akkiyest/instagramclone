@@ -100,6 +100,9 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // セル内のボタンのアクションをソースコードで設定する
         cell.likeButton.addTarget(self, action:#selector(handleButton(_:event:)), forControlEvents:  UIControlEvents.TouchUpInside)
         
+        cell.sendCommentButton.addTarget(self, action:#selector(handleCommentButton(_:event:)), forControlEvents:  UIControlEvents.TouchUpInside)
+        
+        
         return cell
     }
     
@@ -153,4 +156,26 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
             postRef.child(postData.id!).setValue(post)
         }
     }
+    func handleCommentButton(sender: UIButton, event:UIEvent) {
+        
+        // タップされたセルのインデックスを求める
+        let touch = event.allTouches()?.first
+        let point = touch!.locationInView(self.tableView)
+        let indexPath = tableView.indexPathForRowAtPoint(point)
+        let cell = tableView.cellForRowAtIndexPath(indexPath!)
+        
+        // 配列からタップされたインデックスのデータを取り出す
+        let postData = postArray[indexPath!.row]
+        
+        // コメントに載せるIDを記入する
+        let uid = FIRAuth.auth()?.currentUser?.uid
+        // 現状のコメントを読み込む
+        var comment = postData.comment
+        // ユーザーID:コメント　のフォーマットで一行をつくる(エラー履くためコメントアウト）
+        //var urcomment:String = uid! + ":" + cell.commentText
+        // コメントの配列に加える（エラー履くためコメントアウト）
+        //comment.append(urcomment)
+        
+    }
+    
 }
