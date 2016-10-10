@@ -40,7 +40,14 @@ class PostTableViewCell: UITableViewCell {
     func setPostData(postData: PostData) {
         postImageView.image = postData.image
         //「ユーザーネーム：コメント（改行）」のString配列をなしているcommentを追加する
-        captionLabel.text = "\(postData.name!) : \(postData.caption!) \n \(postData.comment)"
+        captionLabel.text = "\(postData.name!) : \(postData.caption!) \n"
+        var counts:Int = 0
+        while counts < postData.comment.endIndex {
+            captionLabel.text? += "\(postData.comment[counts])"
+            counts += 1
+        }
+        captionLabel.numberOfLines = 0
+        captionLabel.sizeToFit()
         
         let likeNumber = postData.likes.count
         likeLabel.text = "\(likeNumber)"
@@ -63,8 +70,4 @@ class PostTableViewCell: UITableViewCell {
         
         
 }
-    func getComment() -> String? {
-        let comment:String? = commentText.text
-        return comment
-    }
 }

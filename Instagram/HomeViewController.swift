@@ -101,10 +101,6 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         cell.likeButton.addTarget(self, action:#selector(handleButton(_:event:)), forControlEvents:  UIControlEvents.TouchUpInside)
         cell.sendCommentButton.addTarget(self, action:#selector(handleCommentButton(_:event:)), forControlEvents:  UIControlEvents.TouchUpInside)
         
-        //セル内のコメント欄に入力されているものを拾う
-        var cmt:String? = cell.commentText.text
-        
-        
         return cell
     }
     
@@ -166,22 +162,33 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let point = touch!.locationInView(self.tableView)
         let indexPath = tableView.indexPathForRowAtPoint(point)
         
-        
+
         // セルを取得してデータを設定する
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath!) as! PostTableViewCell
-        let cmt:String? = cell.dateLabel.text
+        let cell = tableView.cellForRowAtIndexPath(indexPath!) as! PostTableViewCell
+        let cmt:String? = cell.commentText.text
         let postData = postArray[indexPath!.row]
         
         // ユーザーID:コメント(改行）　のフォーマットで一行をつくる(エラー履くためコメントアウト
         let urcomment:String = (FIRAuth.auth()?.currentUser?.displayName)! + ":" + cmt! + "\n"
         // コメントの配列に加える（エラー履くためコメントアウト）
-        //postData.comment.append(urcomment)
+        postData.comment.append(urcomment)
         print(urcomment)
         if cmt != nil {
             print(cmt) //OK
         }
 
         self.tableView.reloadData()
+        let commentsAll = postData.comment
+        let imageString = postData.imageString
+        let name = postData.name
+        let caption = postData.caption
+        let time = (postData.date?.timeIntervalSinceReferenceDate)! as NSTimeInterval
+        let likes = postData.likes
+        
+        let post = ["caption": caption!, "image": imageString!, "name": name!, "time": time, "likes": likes,"comment": commentsAll]
+        let postRef = FIRDatabase.database().reference().child(CommonConst.PostPATH)
+        postRef.child(postData.id!).setValue(post)
+        
     }
     
 }
