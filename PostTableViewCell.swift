@@ -41,8 +41,6 @@ class PostTableViewCell: UITableViewCell {
         postImageView.image = postData.image
         //「ユーザーネーム：コメント（改行）」のString配列をなしているcommentを追加する
         captionLabel.text = "\(postData.name!) : \(postData.caption!) \n \(postData.comment)"
-        //Original
-        //captionLabel.text = "\(postData.name!) : \(postData.caption!)"
         
         let likeNumber = postData.likes.count
         likeLabel.text = "\(likeNumber)"
