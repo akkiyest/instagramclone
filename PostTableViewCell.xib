@@ -102,12 +102,12 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="captionLabel" destination="lF5-4I-dIf" id="9ya-id-9j2"/>
-                <outlet property="commentText" destination="JUO-hK-dYO" id="Vin-oI-73q"/>
+                <outlet property="commentText" destination="JUO-hK-dYO" id="FTq-6T-1gG"/>
                 <outlet property="dateLabel" destination="hGg-pf-zpH" id="o2O-oY-jYG"/>
                 <outlet property="likeButton" destination="F4i-0B-niC" id="p1v-wX-haU"/>
                 <outlet property="likeLabel" destination="XV2-UU-Fzi" id="1ZF-ii-H9O"/>
                 <outlet property="postImageView" destination="bsL-VI-e4x" id="w0e-HS-L6K"/>
-                <outlet property="sendCommentButton" destination="Toa-pl-tQQ" id="JQW-ol-UZC"/>
+                <outlet property="sendCommentButton" destination="Toa-pl-tQQ" id="bFj-Na-A9j"/>
             </connections>
             <point key="canvasLocation" x="408.5" y="546.5"/>
         </tableViewCell>

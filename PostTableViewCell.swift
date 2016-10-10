@@ -20,9 +20,10 @@ class PostTableViewCell: UITableViewCell {
     
     @IBOutlet weak var commentText: UITextField!
     
+    @IBOutlet weak var sendCommentButton: UIButton!
+    
     @IBOutlet weak var likeButton: UIButton!
     
-    @IBOutlet weak var sendCommentButton: UIButton!
     
     
     override func awakeFromNib() {
@@ -38,12 +39,10 @@ class PostTableViewCell: UITableViewCell {
     
     func setPostData(postData: PostData) {
         postImageView.image = postData.image
+        //「ユーザーネーム：コメント（改行）」のString配列をなしているcommentを追加する
         captionLabel.text = "\(postData.name!) : \(postData.caption!) \n \(postData.comment)"
         //Original
         //captionLabel.text = "\(postData.name!) : \(postData.caption!)"
-        
-        ///コメント表示用
-        self.commentWrite(postData)
         
         let likeNumber = postData.likes.count
         likeLabel.text = "\(likeNumber)"
@@ -64,14 +63,10 @@ class PostTableViewCell: UITableViewCell {
             likeButton.setImage(buttonImage, forState: UIControlState.Normal)
         }
         
-    }
-    //コメント表示用
-    func commentWrite(postData: PostData){
-            var cnt:Int = 0
-            while  cnt<postData.commentCnt {
-                let incomment = postData.comment[cnt]+"/n"
-                print(incomment)
-                cnt += 1
-    }
+        
 }
+    func getComment() -> String? {
+        let comment:String? = commentText.text
+        return comment
+    }
 }

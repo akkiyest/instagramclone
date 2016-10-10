@@ -3,7 +3,7 @@ import Firebase
 import FirebaseAuth
 import FirebaseDatabase
 
-class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,UITextFieldDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -99,8 +99,10 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         // セル内のボタンのアクションをソースコードで設定する
         cell.likeButton.addTarget(self, action:#selector(handleButton(_:event:)), forControlEvents:  UIControlEvents.TouchUpInside)
-        
         cell.sendCommentButton.addTarget(self, action:#selector(handleCommentButton(_:event:)), forControlEvents:  UIControlEvents.TouchUpInside)
+        
+        //セル内のコメント欄に入力されているものを拾う
+        //let cmt:String? = cell.commentText.description
         
         
         return cell
@@ -164,18 +166,13 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let indexPath = tableView.indexPathForRowAtPoint(point)
         let cell = tableView.cellForRowAtIndexPath(indexPath!)
         
-        // 配列からタップされたインデックスのデータを取り出す
-        let postData = postArray[indexPath!.row]
         
-        // コメントに載せるIDを記入する
-        let uid = FIRAuth.auth()?.currentUser?.uid
-        // 現状のコメントを読み込む
-        var comment = postData.comment
-        // ユーザーID:コメント　のフォーマットで一行をつくる(エラー履くためコメントアウト）
-        //var urcomment:String = uid! + ":" + cell.commentText
+        // ユーザーID:コメント(改行）　のフォーマットで一行をつくる(エラー履くためコメントアウト
+        //let urcomment:String = (FIRAuth.auth()?.currentUser?.displayName)! + ":" + cmt + "/n"
         // コメントの配列に加える（エラー履くためコメントアウト）
-        //comment.append(urcomment)
-        
+        //postData.comment.append(urcomment)
+        //print(urcomment)
+        self.tableView.reloadData()
     }
     
 }

@@ -30,10 +30,10 @@ class PostViewController: UIViewController {
         
         // 時間を取得する
         let time = NSDate.timeIntervalSinceReferenceDate()
-        let commentcnt = 0
+        let comment:[String] = []
         
         // 辞書を作成してFirebaseに保存する
-        let postData = ["caption": textField.text!, "image": imageData!.base64EncodedStringWithOptions(.Encoding64CharacterLineLength), "name": name, "time": time ,"commentcnt": commentcnt]
+        let postData = ["caption": textField.text!, "image": imageData!.base64EncodedStringWithOptions(.Encoding64CharacterLineLength), "name": name, "time": time ,"comment": comment]
         postRef.childByAutoId().setValue(postData)
         
         // HUDで投稿完了を表示する

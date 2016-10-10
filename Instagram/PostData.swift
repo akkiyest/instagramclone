@@ -18,7 +18,6 @@ class PostData: NSObject {
     var caption: String?
     var date: NSDate?
     var likes: [String] = []
-    var commentCnt: Int?
     var comment:[String] = []
     var isLiked: Bool = false
     
@@ -32,9 +31,9 @@ class PostData: NSObject {
         
         name = valueDictionary["name"] as? String
         
-        commentCnt = valueDictionary["commentcnt"] as? Int
-        
-        comment = valueDictionary["comment"] as! [String]
+        if let comment = valueDictionary["comment"] as? [String] {
+            self.comment = comment
+        }
         
         caption = valueDictionary["caption"] as? String
         
